@@ -1,0 +1,15 @@
+- name: Install FNM
+  hosts: server
+  tasks:
+    - name: Install unzip
+      apt: name=unzip state=present
+      become: yes # run operation with become_user (default=root) using become_method (default=sudo)
+  
+    - name: Install 
+      get_url:
+        url: https://fnm.vercel.app/install
+        dest: /tmp/fnm-install.sh
+        mode: 0755
+
+    - name: Run FNM install script
+      shell: /tmp/fnm-install.sh
